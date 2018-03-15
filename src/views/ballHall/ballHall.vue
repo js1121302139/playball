@@ -1,33 +1,53 @@
 <template>
-  <div class="ballHall">
-    <SearchBox />
-    <swiper :list="list" ></swiper>
-    <!-- 寻找场地 -->
-    <div class="selectHall">
-      <InputItem ico="&#xe642;" placeholder="riqia" />
-      <InputItem ico="&#xe62a;" placeholder="riqia" />
-      <XButton plain type="primary"
-       style="margin-top:10px; border-radius:35px; height:35px; line-height:35px;"
-       @click.native="openPage('ballHallList',{})">立即找场</XButton>
-    </div>
-    <div class="HallList">
-      <TitBar title="推荐场馆"></TitBar>
-      <div class="hallItem" @click.stop="openPage('hallInfo',{item})" :key="item" v-for="item in 10">
-        <img src="http://www.3dmgame.com/uploads/allimg/150804/153_150804102337_1.jpg" alt="">
-        <div class="itemInfo">
-          <p class="hallName">数字篮球生活馆</p>
-          <div class="hallScore">
-            分数
-          </div>
-          <p class="hallAddress">仓山万达 100m</p>
-        </div>
-        <XButton class="btn" type="primary" @click.native.stop="openPage('Reservation',item)">预定</XButton>
+<div>
+  <SearchBox :isTop="isTop" />
+  <div class="ballHall" :class="{ballHallActive : !isTop}" ref="wrapper">
+    <div>
+      <swiper :list="list" ></swiper>
+      <!-- 寻找场地 -->
+      <div class="selectHall">
+        <InputItem ico="&#xe642;" placeholder="riqia" />
+        <InputItem ico="&#xe62a;" placeholder="riqia" />
+        <XButton plain type="primary"
+        style="margin-top:10px; border-radius:35px; height:35px; line-height:35px;"
+        @click.native="openPage('ballHallList',{})">立即找场</XButton>
+      </div>
+
+      <div class="HallList" >
+            <tit-bar title="推荐场馆"></tit-bar>
+        <ul class="content" >
+          <li :key="item" @click="openPage('hallInfo',{})" v-for="item in 10" >
+            <div class="hallItem">
+              <img v-lazy="'http://www.3dmgame.com/uploads/allimg/150804/153_150804102337_1.jpg'" alt="">
+              <div class="itemInfo"  >
+                <p class="hallName">巴拉巴拉</p>
+                <div class="hallScore">
+                  分数
+                </div>
+                <p class="hallAddress">仓山万达 100m</p>
+              </div>
+              <XButton class="btn" type="primary" @click.native.stop="openPage('Reservation',item)">预定</XButton>
+            </div>
+          </li>
+        </ul>
+
       </div>
     </div>
   </div>
+</div>
+
 </template>
 
 <style scoped lang='less'>
+.ballHall {
+  position: absolute;
+  top: 0;
+  bottom: 50px;
+  width: 100%;
+}
+.ballHallActive{
+  top: 50px;
+}
 .Banner {
   width: 100%;
   height: 150px;
@@ -86,7 +106,7 @@
     line-height: 2.1875rem;
     text-align: center;
     border-radius: 1.5625rem;
-    &::after{
+    &::after {
       display: none;
     }
   }
@@ -97,10 +117,8 @@
 import SearchBox from "@/components/searchBox/searchBox";
 import InputItem from "@/components/inputItem/inputItem";
 import TitBar from "@/components/titBar/titBar";
-import {
-  Swiper,
-  XButton
- } from "vux";
+import BScroll from "better-scroll";
+import { Swiper, XButton } from "vux";
 export default {
   name: "ballHall",
   components: {
@@ -112,6 +130,8 @@ export default {
   },
   data() {
     return {
+      isTop:false,
+      scroll:null,
       list: [
         {
           img: "https://static.vux.li/demo/1.jpg",
@@ -123,14 +143,37 @@ export default {
         },
         {
           img: "https://static.vux.li/demo/3.jpg",
-          title: "送你一次旅行",
+          title: "送你一次旅行"
         }
       ]
     };
   },
+  created() {},
+  mounted() {
+    this.scroll = new BScroll(this.$refs.wrapper, {
+      probeType:3,
+      click: true,
+      tap: true,
+      scrollbar: {
+        fade: false
+      }
+    });
+    this.scroll.on('scroll',(pos)=>{
+      this.isTop = pos.y<=-50;
+    })
+  },
   methods: {
+    c() {
+      console.log();
+    },
     openPage(view, item) {
       this.$router.push({ name: view, params: { ...item, Tit: "bb" } });
+    }
+  },
+  watch:{
+    isTop(val,oldVal){
+      console.log(val,oldVal);
+      this.scroll.refresh();
     }
   }
 };

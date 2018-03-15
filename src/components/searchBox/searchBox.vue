@@ -1,5 +1,5 @@
 <template>
-  <div class="searchBox">
+  <div class="searchBox" :class="{ isTop : isTop }">
     <div class="Address" @click="openPage('address',{Tit:'搜索-北京'})">
       <p>福州</p>
       <span class="iconfont add-ico">&#xe60e;</span>
@@ -16,6 +16,13 @@
 </template>
 
 <style scoped lang='less'>
+.isTop{
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  z-index: 999;
+  background: #fff;
+}
 .searchBox {
   display: flex;
   flex: 1;
@@ -76,8 +83,18 @@
 <script>
 export default {
   name: "searchBox",
-  created(){
+  props:{
+    isTop:{
+      type:Boolean,
+      default:false
+    }
+  },
+  data(){
+    return{
 
+    }
+  },
+  created(){
       console.log();
   },
   methods:{

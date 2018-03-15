@@ -1,11 +1,13 @@
 <template>
   <div class="index">
+
     <router-view></router-view>
     <NavBar></NavBar>
   </div>
 </template>
 
 <style scoped lang='less'>
+
 .index{
   padding-bottom: 50px
 }

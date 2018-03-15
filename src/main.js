@@ -3,7 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueLazyload from 'vue-lazyload' //懒加载插件
 
+Vue.use(VueLazyload)
 Vue.prototype.openPage = (view, item) => {
   console.log(this)
   console.log("this.$router")
