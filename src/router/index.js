@@ -12,7 +12,10 @@ import {
   SearchPage,
   SetAddress,
   BallHallList,
-  SelectSession
+  SelectSession,
+  MeInfo,
+  MyInfo_Mod,
+  TechnicalStatistics_Mod
 } from './subView'
 
 Vue.use(Router)
@@ -85,6 +88,27 @@ export default new Router({
       path: '/sallHallList',
       name: 'selectSession',
       component: SelectSession
+    },
+    {
+      path: '/meInfo',
+      name: 'meInfo',
+      component: MeInfo,
+      children: [
+        {
+          path: '/',
+          redirect: '/myInfo_Mod'
+        },
+        {
+          path: '/myInfo_mod',
+          name: 'myInfo_Mod',
+          component: MyInfo_Mod
+        },
+        {
+          path: '/technicalStatistics_Mod',
+          name: 'technicalStatistics_Mod',
+          component: TechnicalStatistics_Mod
+        }
+      ]
     }
   ]
 })
