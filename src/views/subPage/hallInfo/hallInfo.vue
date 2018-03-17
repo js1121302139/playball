@@ -13,12 +13,6 @@
         <div class="giveService">
           <span>按摩</span>
           <span>按摩</span>
-          <span>按摩</span>
-          <span>按摩</span>
-          <span>按摩</span>
-          <span>按摩</span>
-          <span>按摩</span>
-          <span>按摩</span>
         </div>
       </div>
     </div>
