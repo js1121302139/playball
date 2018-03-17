@@ -22,7 +22,7 @@
             <div class="dateItem">
                 <p class="dateDay">今天</p>
                 <p class="dateDayNum">3月13日</p>
-                <p class="dateBtn">yd</p>
+                <p class="dateBtn" @click="openPage('selectSession',{})">yd</p>
             </div>
          </li>
        </ul>
@@ -71,13 +71,12 @@
   height: 35px;
   line-height: 35px;
   background: #fff;
-      font-size: 13px;
-      color: #FF5F5F;
-  &::after{
+  font-size: 13px;
+  color: #ff5f5f;
+  &::after {
     border: none;
     border-top: 1px solid #333;
     border-radius: 0;
-
   }
 }
 .commentsList {
@@ -312,6 +311,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    openPage(view, item) {
+      this.$router.push({ name: view, params: { ...item, Tit: "bb" } });
+    }
   },
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper, {

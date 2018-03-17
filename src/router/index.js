@@ -11,7 +11,8 @@ import {
   Reservation,
   SearchPage,
   SetAddress,
-  BallHallList
+  BallHallList,
+  SelectSession
 } from './subView'
 
 Vue.use(Router)
@@ -79,6 +80,11 @@ export default new Router({
       path: '/ballHallList',
       name: 'ballHallList',
       component: BallHallList
+    },
+    {
+      path: '/sallHallList',
+      name: 'selectSession',
+      component: SelectSession
     }
   ]
 })

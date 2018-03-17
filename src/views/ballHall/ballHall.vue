@@ -1,8 +1,9 @@
 <template>
 <div>
-  <SearchBox :isTop="isTop" />
-  <div class="ballHall" :class="{ballHallActive : !isTop}" ref="wrapper">
+  
+  <div class="ballHall" >
     <div>
+      <SearchBox  />
       <swiper :list="list" ></swiper>
       <!-- 寻找场地 -->
       <div class="selectHall">
@@ -13,9 +14,9 @@
         @click.native="openPage('ballHallList',{})">立即找场</XButton>
       </div>
 
-      <div class="HallList" >
-            <tit-bar title="推荐场馆"></tit-bar>
+      <div class="HallList" ref="wrapper">
         <ul class="content" >
+          <tit-bar title="推荐场馆"></tit-bar>
           <li :key="item" @click="openPage('hallInfo',{})" v-for="item in 10" >
             <div class="hallItem">
               <img v-lazy="'http://www.3dmgame.com/uploads/allimg/150804/153_150804102337_1.jpg'" alt="">
@@ -65,7 +66,14 @@
   }
 }
 .HallList {
-  padding: 0 12px;
+     position: absolute;
+     width: 100%;
+    top: 345px;
+    bottom: 0px;
+    overflow: hidden;
+    li{
+          padding: 0 12px;
+    }
   .titBar {
     height: 2.1875rem;
     line-height: 2.1875rem;
@@ -159,7 +167,7 @@ export default {
       }
     });
     this.scroll.on('scroll',(pos)=>{
-      this.isTop = pos.y<=-50;
+      console.log(pos)
     })
   },
   methods: {
