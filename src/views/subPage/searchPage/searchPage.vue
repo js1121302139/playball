@@ -10,7 +10,7 @@
           搜索
         </div>
     </div>
-    <div class="searchList" v-if="false">
+    <div class="searchList" v-if="true">
       <div class="listItem" :key="item" v-for="item in 10">
         <div class="top">
           <p class="name">xxxxx馆</p>
