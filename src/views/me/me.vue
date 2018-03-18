@@ -14,11 +14,11 @@
     </blur>
     <Flexbox class="meInfo"  >
       <div class="container">
-        <FlexboxItem class="meInfoItem" @click.native="openPage('meInfo',{})">
+        <FlexboxItem class="meInfoItem" @click.native="openPage('','/meInfo',{})">
           <span class="iconfont meInfoIco">&#xe62b;</span>
           <p>我的信息</p>
         </FlexboxItem>
-        <FlexboxItem class="meInfoItem">
+        <FlexboxItem class="meInfoItem" @click.native="openPage('','/ballTeam',{})">
           <span class="iconfont meInfoIco">&#xe66b;</span>
           <p>球队信息</p>
         </FlexboxItem>
@@ -68,12 +68,12 @@
     justify-content: center;
     span {
       display: inline-block;
-      padding: 3px 5px;
+      padding: 3px 13px;
       margin: 0 3px;
       font-size: 12px;
-      color: #333;
-      background: rgba(255, 255, 255, 0.65);
-      border-radius: 3px;
+      color: #fff;
+      border-radius: 16px;
+      border: 1px solid #fff;
     }
   }
 }
@@ -101,12 +101,11 @@
   .meInfoItem:last-child {
     border: none;
   }
-
 }
-.box-ico{
-    font-size: 24px;
-    margin-right: 12px;
-  }
+.box-ico {
+  font-size: 24px;
+  margin-right: 12px;
+}
 </style>
 
 <script>
@@ -125,9 +124,10 @@ export default {
       url: "https://o3e85j0cv.qnssl.com/tulips-1083572__340.jpg"
     };
   },
-  methods:{
-    openPage(view, item) {
-      this.$router.push({ name: view, params: { ...item, Tit: "bb" } });
+  methods: {
+    openPage(view, url, item) {
+      view && this.$router.push({ name: view, params: { ...item, Tit: "bb" } });
+      url && this.$router.push({ path: url });
     }
   }
 };

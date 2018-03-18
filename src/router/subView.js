@@ -16,6 +16,10 @@ import MeInfo from '@/views/me/subPage/meInfo/meInfo'
 import MyInfo_Mod from '@/views/me/subPage/myInfo_Mod/myInfo_Mod'
 // 我的信息页面技术统计
 import TechnicalStatistics_Mod from '@/views/me/subPage/technicalStatistics_Mod/technicalStatistics_Mod'
+// 我的信息编辑页面
+import MeInfoEdit from '@/views/me/subPage/meInfoEdit/meInfoEdit'
+// 我的球队
+import BallTeam from '@/views/me/subPage/ballTeam/ballTeam'
 export {
   Reservation,
   hallInfo,
@@ -25,5 +29,7 @@ export {
   SelectSession,
   MeInfo,
   MyInfo_Mod,
-  TechnicalStatistics_Mod
+  TechnicalStatistics_Mod,
+  MeInfoEdit,
+  BallTeam
 }

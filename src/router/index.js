@@ -15,7 +15,9 @@ import {
   SelectSession,
   MeInfo,
   MyInfo_Mod,
-  TechnicalStatistics_Mod
+  TechnicalStatistics_Mod,
+  MeInfoEdit,
+  BallTeam
 } from './subView'
 
 Vue.use(Router)
@@ -91,12 +93,11 @@ export default new Router({
     },
     {
       path: '/meInfo',
-      name: 'meInfo',
       component: MeInfo,
       children: [
         {
           path: '/',
-          redirect: '/myInfo_Mod'
+          redirect: '/myInfo_mod'
         },
         {
           path: '/myInfo_mod',
@@ -109,6 +110,17 @@ export default new Router({
           component: TechnicalStatistics_Mod
         }
       ]
-    }
+    },
+    {
+      path: '/meInfoEdit',
+      name: 'meInfoEdit',
+      component: MeInfoEdit
+    },
+    {
+      path: '/ballTeam',
+      name: 'ballTeam',
+      component: BallTeam
+    },
+
   ]
 })

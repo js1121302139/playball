@@ -16,6 +16,9 @@ export default {
 
 <style lang='less'>
 @import "reset.css";
+a{
+  text-decoration: none;
+}
 @font-face {
   font-family: 'iconfont';  /* project id 589236 */
   src: url('//at.alicdn.com/t/font_589236_tj0ir2q937v3rf6r.eot');

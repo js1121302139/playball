@@ -1,6 +1,6 @@
 <template>
   <div class="meInfo">
-    <x-header  :left-options="{backText: ''}">我的信息</x-header>
+    <x-header @on-click-back="back"   :left-options="{backText: '',preventGoBack:true}">我的信息</x-header>
     <blur :blur-amount=40 :url="url" :height=180>
       <p class="center"><img :src="url"></p>
       <div class="userInfo">
@@ -40,15 +40,15 @@
     color: #ffffff;
   }
 }
-.meInfoNav{
-  a{
+.meInfoNav {
+  a {
     display: flex;
     justify-content: center;
     text-decoration: none;
     color: #000;
   }
-  .vux-tab-selected{
-    a{
+  .vux-tab-selected {
+    a {
       color: #333;
     }
   }
@@ -61,7 +61,9 @@ export default {
   name: "meInfo",
   data() {
     return {
-      url: "https://o3e85j0cv.qnssl.com/tulips-1083572__340.jpg"
+      url: "https://o3e85j0cv.qnssl.com/tulips-1083572__340.jpg",
+      isGoBack: true,
+      routeHistory: -1
     };
   },
   components: {
@@ -71,8 +73,12 @@ export default {
     TabItem
   },
   methods: {
+    back() {
+      this.$router.go(this.routeHistory);
+    },
     onItemClick() {
-      console.log("a");
+      this.routeHistory -= 1;
+      console.log(this.routeHistory);
     }
   }
 };

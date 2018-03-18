@@ -9,7 +9,7 @@
          <p class="txt"> Vestibulum sed lacus nec justo porta rhoncus non quis dui. Suspendisse id iaculis dui. Vestibulum at accumsan odio. Quisque interdum massa quis ex commodo facilisis.</p>
        </div>
     </group>
-     <x-button class="footer" plain>修改信息</x-button>
+     <x-button class="footer" @click.native="openPage('meInfoEdit',{})" plain>修改信息</x-button>
   </div>
 </template>
 
@@ -26,8 +26,7 @@
     }
   }
   .footer{
-    position: fixed;
-    bottom: 0;
+    margin-top: 50px;
   }
 </style>
 
@@ -39,6 +38,11 @@ export default {
     Group,
     Cell,
     XButton
+  },
+  methods:{
+    openPage(view, item) {
+      view && this.$router.push({ name: view, params: { ...item, Tit: "bb" } });
+    }
   }
 };
 </script>
