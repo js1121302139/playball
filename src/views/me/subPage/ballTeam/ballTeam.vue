@@ -6,9 +6,14 @@
       <tab-item >我加入的</tab-item>
       <tab-item >我关注的</tab-item>
     </tab>
+    
     <div ref="wrapper" class="wrapper">
       <group class="container" gutter="0">
+<<<<<<< HEAD
         <cell is-link class="ballTeamItem" :link="{path:'/teamInfo'}" :key="item" v-for="item in 20">
+=======
+        <cell is-link class="ballTeamItem" :link="{path:'/ballTeamInfo'}" v-for="item in 20" :key="item">
+>>>>>>> 81dae2c06996567d8c420716da0b14c02e444544
             <img slot="icon" v-lazy="'http://www.3dmgame.com/uploads/allimg/150804/153_150804102337_1.jpg'" alt="">
             <div slot="after-title" class="ballTeamInfo">
                 <p class="ballTeamName">破风（10人）</p>
@@ -80,7 +85,15 @@ export default {
     };
   },
   mounted() {
-    this.scroll = new BScroll(this.$refs.wrapper, {});
+    this.scroll = new BScroll(this.$refs.wrapper, {
+      click:true,
+      tap:true
+    });
+  },
+  methods: {
+    openPage(view, item) {
+      view && this.$router.push({ name: view, params: { ...item, Tit: "bb" } });
+    }
   }
 };
 </script>

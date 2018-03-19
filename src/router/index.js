@@ -17,7 +17,8 @@ import {
   MyInfo_Mod,
   TechnicalStatistics_Mod,
   MeInfoEdit,
-  BallTeam
+  BallTeam,
+  BallTeamInfo
 } from './subView'
 
 Vue.use(Router)
@@ -121,6 +122,10 @@ export default new Router({
       name: 'ballTeam',
       component: BallTeam
     },
-
+    {
+      path: '/ballTeamInfo',
+      name: 'ballTeamInfo',
+      component: BallTeamInfo
+    }
   ]
 })
