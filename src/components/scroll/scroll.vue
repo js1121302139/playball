@@ -4,13 +4,13 @@
           <div class="dowLoding" v-if="isDowLoad">
               <slot name="dowLoding"></slot>
           </div>
-        <slot>   
+        <slot>
         </slot>
          <div class="upLoding" v-if="isUpLoding">
               <slot name="upLoding"></slot>
           </div>
       </div>
-      
+
   </div>
 </template>
 
@@ -21,6 +21,16 @@ export default {
   name: "scroll",
   components: {},
   props: {
+    position:{
+      type:Object,
+      default:{
+        height:100,
+        width:'100%',
+        top:0,
+        bottom:0,
+        position:''
+      }
+    },
     freeScroll: {
       type: Boolean,
       default: false
@@ -56,38 +66,26 @@ export default {
     };
   },
   methods: {
+    scrollViewOption(position,container){
+      console.log(position.position)
+      if(position.position=='absolute'){
+        container.style.position = position.position;
+        container.style.top = position.top;
+        container.style.bottom = position.bottom;
+        container.style.width = position.width;
+        console.log(container.style)
+      }
+      let scroll = new BScroll(container,{
+        click:true,
+        tap:true,
+
+      })
+    },
     scrollInit() {
-      let options = {
-        probeType: 3,
-        startY: true,
-        click: true,
-        tap: true,
-        pullDownRefresh: {
-          threshold: 50,
-          stop: 20
-        },
-        pullUpLoad: {
-          threshold: 50
-        }
-      };
-      let scroll = new BScroll(this.$refs.scrollView, options);
-      //   scroll, scrollEnd, pullingUp, pullingDown
-      scroll.on("scroll", pos => {
-        this.$emit("scrollIn", pos);
-      });
-      scroll.on("pullingDown", pos => {
-        this.isDowLoding = true;
-        console.log(this.pullUpLoad);
-        this.$emit("pullingDown");
-        scroll.finishPullDown();
-      });
-      scroll.on("pullingUp", pos => {
-        this.$emit("pullingUp");
-        scroll.finishPullUp();
-      });
-      scroll.on("scrollEnd", pos => {
-        this.$emit("scrollIn", pos);
-      });
+
+      let wrapper = this.$refs.scrollView;
+      this.scrollViewOption(this.position,wrapper)
+
     }
   },
   created() {},

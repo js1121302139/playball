@@ -8,7 +8,7 @@
     </tab>
     <div ref="wrapper" class="wrapper">
       <group class="container" gutter="0">
-        <cell is-link class="ballTeamItem" :key="item" v-for="item in 20">
+        <cell is-link class="ballTeamItem" :link="{path:'/teamInfo'}" :key="item" v-for="item in 20">
             <img slot="icon" v-lazy="'http://www.3dmgame.com/uploads/allimg/150804/153_150804102337_1.jpg'" alt="">
             <div slot="after-title" class="ballTeamInfo">
                 <p class="ballTeamName">破风（10人）</p>
