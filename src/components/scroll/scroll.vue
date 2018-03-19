@@ -1,26 +1,26 @@
 <template>
   <div class="scroll" ref="scrollView">
       <div class="container">
-          <div class="dowLoding" v-if="isDowLoad">
-              <slot name="dowLoding"></slot>
-          </div>
         <slot>
         </slot>
-         <div class="upLoding" v-if="isUpLoding">
-              <slot name="upLoding"></slot>
-          </div>
+        <load-more v-if="showLoding" tip="正在加载"></load-more>
+        <load-more :show-loading="false" tip="我可是有底线的" background-color="#fbf9fe"></load-more>
+        <load-more :show-loading="false" background-color="#fbf9fe"></load-more>
       </div>
-
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 import BScroll from "better-scroll";
+import { LoadMore  } from 'vux'
 import { type } from "os";
 export default {
   name: "scroll",
-  components: {},
+  components: {
+    LoadMore
+  },
   props: {
+    // scroll定位
     position:{
       type:Object,
       default:{
@@ -31,38 +31,18 @@ export default {
         position:''
       }
     },
-    freeScroll: {
-      type: Boolean,
-      default: false
+    loadOver:{
+      type:'',
+      default:false
     },
-    pullUpLoad: {
-      type: Boolean,
-      default: true
-    },
-    pullDownRefresh: {
-      type: Boolean,
-      default: true
-    },
-    startX: {
-      type: Boolean,
-      default: true
-    },
-    startX: {
-      type: Boolean,
-      default: false
-    },
-    isDowLoad:{
-        type:Boolean,
-        default:false
-    },
-    isUpLoding:{
-        type:Boolean,
-        default:false
+    showLoding:{
+      type:Boolean,
+      default:false
     }
   },
   data() {
     return {
-      isDowLoding: false
+      scroll:null
     };
   },
   methods: {
@@ -75,34 +55,44 @@ export default {
         container.style.width = position.width;
         console.log(container.style)
       }
-      let scroll = new BScroll(container,{
+      this.scroll = new BScroll(container,{
+        probeType:3,
         click:true,
         tap:true,
-
+        pullUpLoad: {
+          threshold: 0
+        }
       })
+      this.scroll.on('scroll',(pos)=>{
+        this.$emit('scrollIn',pos)
+      })
+
     },
     scrollInit() {
-
       let wrapper = this.$refs.scrollView;
-      this.scrollViewOption(this.position,wrapper)
-
+      this.scrollViewOption(this.position, wrapper)
+    },
+    _refresh(){
+      console.log('00');
+      this.scroll.finishPullUp();
     }
   },
   created() {},
   mounted() {
     this.scrollInit();
+    this.scroll.on('pullingUp',()=>{
+      setTimeout(()=>{
+        this.$emit('upLoading')
+      },100)
+    })
   },
   watch:{
-      isDowLoad(val,oldVal){
-        if(val){
-            this.isDowLoding = false;
-            val = false;
-        }else{
-            this.isDowLoding = true;
-        }
-         console.log(val+"888")
-         console.log(this.isDowLoding+"999")
-      }
+    loadOver(val,oldVal){
+      console.log(val)
+      setTimeout(()=>{
+        this._refresh();
+      },500)
+    }
   }
 };
 </script>
